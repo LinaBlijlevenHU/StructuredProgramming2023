@@ -10,3 +10,4 @@ Hogeschool Utrecht.
 # Mastermind
 
 * **Les 2**: In deze les hebben we een begin gemaakt aan een guessing game, waarbij een kleur geraden kan worden. Dit zal verder uitgebreid worden. Daarnaast hebben we een scriptje om permutaties te genereren, zodat we weten wat de mogelijke codes zijn.
+* **Les 3**: In deze les zijn we bezig geweest met een feedbackfunctie en de bijhorende frequentietabellen.

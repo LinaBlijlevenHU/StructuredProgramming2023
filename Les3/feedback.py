@@ -2,45 +2,58 @@ import itertools
 
 # Spelinstellingen
 KLEUREN = ['A', 'B', 'C', 'D', 'E', 'F']
-LENGTE = 3
+LENGTE = 4
 
-# Feedbackfunctie uit de klas
-def code_feedback(secret, gok):
-    goed, bijnagoed = 0, 0
+def feedback(code, pegs):
+    '''
+    Returns a tuple with the number of correct guesses (black) and the
+    number of correct colors but wrong positions (white)
 
-    # Kopieer de codes om te kunnen bewerken
-    gok, secret = list(gok).copy(), list(secret).copy()
+    Source: https://github.com/peterstark72/mastermind/blob/master/mastermind.py
+    :param  tuple   The code, e.g. (1,2,3,4)
+    :param  tuple   The guess, e.g. (1,1,1,1)
+    :return tuple   The feedback (black, white) or (correct, correct/wrong position)
 
-    # Vervang alle exacte matches door een plusje
-    for i in range(LENGTE):
-        if secret[i] == gok[i]:
-            secret[i], gok[i] = '+', '+'
-            goed += 1
+    Example:
+    The code (1,2,3,4) and guess (1,1,1,1), will return (1,0) since only the first peg is correct.
+    '''
 
-    # Als de kleur ergens anders in de code zit telt hij als
-    # bijna goed
-    for j in range(LENGTE):
-        if (gok[j] != '+') and (gok[j] in secret):
-            bijnagoed += 1
+    # Bepaal een set van alle indices bijv. (0, 1, 2, 3)
+    positions = set(range(len(code)))
 
-    return (goed, bijnagoed)
+    # Bepaal de posities waar de pinnen al op de goede plek staan.
+    black_positions = set(
+        [pos for pos, peg in enumerate(pegs) if peg == code[pos]])
+    # Bepaal hoeveel pinnen al goed staan.
+    blacks = len(black_positions)
 
-# Damian's versie van de feedbackfunctie
-def generate_feedback(combo, gok):
-    # Starter feedback if no letters are correct
-    feedback = [0, 0]
-    # Check every letter in the combination
-    for i in range(LENGTE):
-         # If the letter is in the right spot
-        if combo[i] == gok[i]:
-            feedback[0] += 1
-            feedback[1] -= 1
-        # If the letter is in the wrong spot
-        elif combo[i] in gok:
-            feedback[1] += 1
-    if feedback[1] < 0:
-        feedback[1] = 0
-    return feedback
+    # Vergelijk de sets met indices om te kijken welke pinnetjes nog over zijn
+    remains_pos = positions - black_positions
+    # Selecteer de onderdelen van de code die nog over zijn
+    remains = [code[pos] for pos in remains_pos]
+
+    # Teller voor correcte kleur/verkeerde positie pinnetjes
+    whites = 0
+    # Set van kleuren waar al witte pinnetjes voor uitgedeeld zijn
+    awarded_duplicates = set()
+    # Voor elke index van een overgebleven pin
+    for pos in remains_pos:
+        # Bepaal de kleur
+        color = pegs[pos]
+        # Staat de kleur verderop in de code? Én zijn er minder of even veel van deze kleur in
+        # de overgebleven code en de geheime code.
+        if color in remains and pegs.count(color) <= code.count(color):
+            # Voeg een witte pin toe
+            whites += 1
+        # Als anders de kleur verderop in de code staat en de kleur nog niet in
+        elif color in remains and color not in awarded_duplicates:
+            # Voeg een witte pin toe
+            whites += 1
+            # We kunnen verder geen witte pinnen meer toevoegen voor deze kleur
+            awarded_duplicates.add(color)
+
+    # Geef het resultaat terug als tuple
+    return blacks, whites
 
 # Frequentiefunctie
 def freq(lijst):
@@ -55,10 +68,10 @@ def freq(lijst):
 combinaties = [x for x in itertools.product(KLEUREN, repeat=LENGTE)]
 print(len(combinaties))
 
-feedbackAAA = [code_feedback(combi, ['A', 'A', 'A']) for combi in combinaties]
-feedbackAAB = [code_feedback(combi, ['A', 'A', 'B']) for combi in combinaties]
-feedbackABC = [code_feedback(combi, ['A', 'B', 'C']) for combi in combinaties]
+feedback1 = [feedback(combi, ['A', 'A', 'A', 'A']) for combi in combinaties]
+feedback2 = [feedback(combi, ['A', 'A', 'A', 'B']) for combi in combinaties]
+feedback3 = [feedback(combi, ['A', 'A', 'B', 'C']) for combi in combinaties]
 
-print(freq(feedbackAAA))
-print(freq(feedbackAAB))
-print(freq(feedbackABC))
+print(freq(feedback1))
+print(freq(feedback2))
+print(freq(feedback3))

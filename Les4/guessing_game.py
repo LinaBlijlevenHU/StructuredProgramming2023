@@ -1,5 +1,9 @@
+# Importeren van libraries (standaard geinstalleerd)
 import random
 import itertools
+
+# Importeer de feedbackfunctie van het internet
+from feedback import feedback
 
 # Globale variabelen voor de spelinstellingen
 LENGTE = 4
@@ -51,15 +55,22 @@ def vraag_input():
 
     return guess
 
+def opnieuw():
+    # Geef de gebruiker de mogelijkheid om opnieuw te spelen
+    opnieuw = input("Wil je opnieuw spelen? Typ ja of nee: ")
+
+    # Start het spel opnieuw indien nodig
+    if (opnieuw == "ja"):
+        main()
+
 def main():
     '''
     De main game functie (speelt één spel)
     '''
+    print(f"Welkom bij Mastermind! Je kan kiezen uit de kleuren {KLEUREN}")
+
     # Kies een geheime combinatie
     secret = random.choice(PERMUTATIES)
-    print(secret)
-
-    print(f"Welkom bij Mastermind! Je kan kiezen uit de kleuren {KLEUREN}")
 
     # We beginnen met een foute code om de loop in te gaan
     guess = vraag_input()
@@ -75,7 +86,9 @@ def main():
         print("Dat is helaas niet goed :(")
         print(f"Je hebt nog {MAX_GUESSES - aantal_gokken} pogingen.")
 
-        # @TODO: Geef de gebruiker feedback
+        # Feedback
+        zwart, wit = feedback(secret, guess)
+        print(f"Er staan nu {zwart} pinnetjes op de juiste plek. {wit} pinnetje(s) hebben de juiste kleur, maar de verkeerde plek.")
 
         # @TODO: Bepaal welke mogelijkheden nog over zijn
 
@@ -88,18 +101,13 @@ def main():
         aantal_gokken += 1
 
     # Heeft de gebruiker gewonnen?
-    # @TODO: Kan dit mooier?
     if (secret == guess):
         print(f"Je hebt het goed geraden in {aantal_gokken} keer!")
     else:
         print("Sorry! Je hebt de code niet geraden.")
 
-    # Geef de gebruiker de mogelijkheid om opnieuw te spelen
-    opnieuw = input("Wil je opnieuw spelen? Typ ja of nee: ")
-
-    # Start het spel opnieuw indien nodig
-    if (opnieuw == "ja"):
-        main()
+    # Laat de gebruiker opnieuw spelen
+    opnieuw()
 
 # Zorg dat het spel alleen runt als we dit specifieke script runnen
 if __name__ == "__main__":

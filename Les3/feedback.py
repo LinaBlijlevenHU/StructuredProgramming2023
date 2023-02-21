@@ -1,5 +1,9 @@
 import itertools
 
+# Versie uit de slides: als je deze wil gebruiken zul je ook
+# moeten zorgen dat deze wordt aangeroepen i.p.v. feedback.
+from evaluate import evaluate
+
 # Spelinstellingen
 KLEUREN = ['A', 'B', 'C', 'D', 'E', 'F']
 LENGTE = 4
@@ -55,8 +59,14 @@ def feedback(code, pegs):
     # Geef het resultaat terug als tuple
     return blacks, whites
 
-# Frequentiefunctie
+# Frequentiefunctie (denk terug aan FA-AI3: Statistiek)
 def freq(lijst):
+    '''
+    Bepaal een dictionary met frequenties voor een gegeven lijst.
+
+    :param  list
+    :return dict
+    '''
     f = {}
 
     for element in lijst:
@@ -65,9 +75,12 @@ def freq(lijst):
 
     return f
 
+# Genereer alle mogelijke combinaties met itertools
 combinaties = [x for x in itertools.product(KLEUREN, repeat=LENGTE)]
 print(len(combinaties))
 
+# Test of we de juiste frequenties krijgen, zodat deze overeen komen
+# met de tabellen uit de paper.
 feedback1 = [feedback(combi, ['A', 'A', 'A', 'A']) for combi in combinaties]
 feedback2 = [feedback(combi, ['A', 'A', 'A', 'B']) for combi in combinaties]
 feedback3 = [feedback(combi, ['A', 'A', 'B', 'C']) for combi in combinaties]

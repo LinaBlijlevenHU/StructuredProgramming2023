@@ -2,6 +2,10 @@
 import random
 import itertools
 
+# Importeren van onze eigen functies uit andere files
+import ai
+import gebruiker_input
+
 # Globale variabelen voor de spelinstellingen
 LENGTE = 4
 KLEUREN = ['A', 'B', 'C', 'D', 'E', 'F']
@@ -112,14 +116,6 @@ def vraag_input():
 
     return guess
 
-def opnieuw():
-    # Geef de gebruiker de mogelijkheid om opnieuw te spelen
-    opnieuw = input("Wil je opnieuw spelen? Typ ja of nee: ")
-
-    # Start het spel opnieuw indien nodig
-    if (opnieuw == "ja"):
-        main()
-
 def main():
     '''
     De main game functie (speelt één spel)
@@ -128,20 +124,23 @@ def main():
 
     # Kies een geheime combinatie
     secret = random.choice(PERMUTATIES)
-
-    # We beginnen met een foute code om de loop in te gaan
-    guess = vraag_input()
-
-    # Het aantal keer dat we geraden hebben
-    aantal_gokken = 1
+    print(secret)
 
     # Bepaal alle mogelijkheden
     mogelijkheden = PERMUTATIES.copy()
 
+    # We beginnen met een foute code om de loop in te gaan
+    #guess = vraag_input()
+    # Kan bijvoorbeeld vervangen worden door een vraag aan de AI
+    guess = ai.vraag_gok(mogelijkheden)
+
+    # Het aantal keer dat we geraden hebben
+    aantal_gokken = 1
+
     # Main game loop
     while secret != guess and aantal_gokken < MAX_GUESSES:
         # Informeer de gebruiker
-        print("Dat is helaas niet goed :(")
+        print(f"De code {guess} is helaas niet goed :(")
         print(f"Je hebt nog {MAX_GUESSES - aantal_gokken} pogingen.")
 
         # Feedback
@@ -153,9 +152,9 @@ def main():
         print(f"Er zijn nu nog {len(mogelijkheden)} mogelijkheden over.")
 
         # Laat de gebruiker opnieuw raden
-        guess = vraag_input()
+        #guess = vraag_input()
         # Kan bijvoorbeeld vervangen worden door een vraag aan de AI
-        #guess = vraag_ai(possibilities)
+        guess = ai.vraag_gok(mogelijkheden)
 
         # Voeg een poging toe
         aantal_gokken += 1
@@ -167,7 +166,8 @@ def main():
         print("Sorry! Je hebt de code niet geraden.")
 
     # Laat de gebruiker opnieuw spelen
-    opnieuw()
+    if (gebruiker_input.ja_nee_vraag("Wil je opnieuw spelen?")):
+        main()
 
 # Zorg dat het spel alleen runt als we dit specifieke script runnen
 if __name__ == "__main__":

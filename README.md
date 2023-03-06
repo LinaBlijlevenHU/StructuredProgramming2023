@@ -14,3 +14,6 @@ Hogeschool Utrecht.
 * **Les 4**: In deze les is de feedbackfunctie vervangen door één van het internet: de frequenties bleken niet overeen te komen met de frequenties uit de paper. De oude versie is vervangen in de repository om verwarring te voorkomen. Daarnaast hebben we Mastermind functioneel gemaakt en kunnen we aan de slag met AI.
 * **Les 5**: In deze les is de reduce-functie behandeld, om de nieuwe mogelijkheden te bepalen waar de AI vervolgens uit kan kiezen.
 * **Les 6**: In deze les hebben we het programma opgedeeld in meerdere modules. Ook hebben we input-validatie behandeld.
+
+# MongoDB & Relationele Databases
+* **Les 7**: In deze les hebben we de opdracht besproken. De folder bevat een voorbeeld over iterables en over het inlezen van producten met pymongo.

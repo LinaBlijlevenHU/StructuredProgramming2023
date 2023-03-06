@@ -17,3 +17,5 @@ Hogeschool Utrecht.
 
 # MongoDB & Relationele Databases
 * **Les 7**: In deze les hebben we de opdracht besproken. De folder bevat een voorbeeld over iterables en over het inlezen van producten met pymongo.
+
+![Diagram voor de werking v.d. webshop](./Les7/SPGP-diagram.drawio.png)

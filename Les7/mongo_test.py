@@ -9,8 +9,11 @@ print(client)                               # MongoClient
 print(client.sp_db)                         # Database
 print(client.sp_db.products)                # Collectie (i.e. tabel)
 print(client.sp_db.products.find_one())     # Eerste product
-print(client.sp_db.products.find())
+print(client.sp_db.products.find())         # Hiermee maken we een cursor aan: zie iterable_demo.py
 
-# Lees de data uit
+# De volgende stappen zijn voor jou!
+# 1. Lees de data uit
 
-# Zet de data over
+# 2. Maak een selectie van de eigenschappen die je nodig hebt.
+
+# 3. Zet de data over naar een relationele database naar keuze.

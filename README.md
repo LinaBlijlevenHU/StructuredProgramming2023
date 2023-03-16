@@ -6,6 +6,7 @@ Hogeschool Utrecht.
 # Divers
 
 * **Les 1**: Voor deze les hebben we het voorbeeld met de frisdrankautomaat van PROG-FA1. Ga ook vast aan de slag met formatieve opdracht 1a ter voorbereiding van Mastermind.
+* **Les 9**: In deze les met V1A en V1B hebben we gekeken naar veel gemaakte fouten in bijv. de Mastermind opdracht.
 
 # Mastermind
 
@@ -17,5 +18,6 @@ Hogeschool Utrecht.
 
 # MongoDB & Relationele Databases
 * **Les 7**: In deze les hebben we de opdracht besproken. De folder bevat een voorbeeld over iterables en over het inlezen van producten met pymongo.
+* **Les 8**: In deze les is geen code geschreven, vanwege een verwonding aan mijn hand.
 
 ![Diagram voor de werking v.d. webshop](./Les7/SPGP-diagram.drawio.png)

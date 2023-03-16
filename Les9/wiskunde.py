@@ -17,3 +17,17 @@ def tot_de_macht(a, b):
     :return     int|float
     '''
     return a ** b
+
+# Frequentiefunctie (denk terug aan FA-AI3: Statistiek)
+def freq(lijst):
+    '''
+    Bepaal een dictionary met frequenties voor een gegeven lijst.
+
+    :param  list
+    :return dict
+    '''
+    f = {}
+    for element in lijst:
+        # Tel 1 op bij de huidige frequentie van het element (default 0)
+        f[element] = f.get(element, 0) + 1
+    return f

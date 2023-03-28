@@ -20,6 +20,6 @@ Hogeschool Utrecht.
 
 ## MongoDB & Relationele Databases
 * **Les 7**: In deze les hebben we de opdracht besproken. De folder bevat een voorbeeld over iterables en over het inlezen van producten met pymongo.
-* **Les 8**: In deze les is geen code geschreven, vanwege een verwonding aan mijn hand.
+* **Les 8**: In deze les is geen code geschreven.
 
 ![Diagram voor de werking v.d. webshop](./Les7/SPGP-diagram.drawio.png)
